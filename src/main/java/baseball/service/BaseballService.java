@@ -66,7 +66,7 @@ public class BaseballService {
     private void checkException(
             final String number
     ) {
-//        baseballException.checkEtc(number);
+        baseballException.checkEtc(number);
         baseballException.checkNothing(number);
         baseballException.checkNumberSize(number);
         baseballException.checkOverlap(number);
