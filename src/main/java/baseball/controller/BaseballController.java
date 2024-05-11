@@ -1,19 +1,20 @@
 package baseball.controller;
+
 import baseball.exception.BaseballException;
-import baseball.service.BaseballService;
 import baseball.io.Input;
 import baseball.io.Output;
+import baseball.service.BaseballService;
 
 public class BaseballController {
 
+    private final int RESTARTKEY = 1;
+    private final int SHUTDOWNKEY = 2;
     private Input input;
     private Output output;
     private BaseballService service;
     private BaseballException baseballException;
-    private final int RESTARTKEY = 1;
-    private final int SHUTDOWNKEY = 2;
 
-    public void start(){
+    public void start() {
         init();
         int key = 0;
         String restartKey = "";
@@ -28,10 +29,10 @@ public class BaseballController {
             output.restartGame();
             restartKey = input.input();
             key = checkRestartKey(restartKey);
-        }while(key != SHUTDOWNKEY);
+        } while (key != SHUTDOWNKEY);
     }
 
-    private void init(){
+    private void init() {
         input = new Input();
         output = new Output();
         service = new BaseballService();
@@ -40,7 +41,7 @@ public class BaseballController {
 
     private int checkRestartKey(
             final String restartKey
-    ){
+    ) {
         baseballException.checkRestartKey(restartKey);
         return Integer.parseInt(restartKey);
     }

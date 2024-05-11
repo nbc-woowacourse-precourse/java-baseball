@@ -4,10 +4,7 @@ import baseball.exception.BaseballException;
 import baseball.io.Output;
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class BaseballService {
 

@@ -36,18 +36,18 @@ public class BaseballException {
 
     public void checkEtc(
             final String number
-    ){
+    ) {
         String regex = "[0-9]+";
-        if(!number.matches(regex)){
+        if (!number.matches(regex)) {
             throw new IllegalArgumentException("숫자를 입력해주세요");
         }
     }
 
     public void checkRestartKey(
             final String number
-    ){
+    ) {
         String regex = "[12]";
-        if(!number.matches(regex)){
+        if (!number.matches(regex)) {
             throw new IllegalArgumentException("1과 2만 입력이 가능합니다");
         }
     }
