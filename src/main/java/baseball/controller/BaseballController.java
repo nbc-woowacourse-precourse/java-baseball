@@ -10,23 +10,25 @@ public class BaseballController {
     private Output output;
     private BaseballService service;
     private BaseballException baseballException;
+    private final int RESTARTKEY = 1;
     private final int SHUTDOWNKEY = 2;
 
     public void start(){
         init();
-        String answerNumber = service.makeAnswerNumber();
-        int endKey = 0;
+        int key = 0;
         String restartKey = "";
-        output.startGame();
-        do{
-            String inputNumber = input.input();
-            if(service.checkNumber(inputNumber, answerNumber)){
-                output.restartGame();
-                restartKey = input.input();
-                endKey = checkRestartKey(restartKey);
-            };
-
-        }while(endKey != SHUTDOWNKEY);
+        boolean answerCheck;
+        do {
+            String answerNumber = service.makeAnswerNumber();
+            output.startGame();
+            do {
+                String inputNumber = input.input();
+                answerCheck = service.checkNumber(inputNumber, answerNumber);
+            } while (answerCheck);
+            output.restartGame();
+            restartKey = input.input();
+            key = checkRestartKey(restartKey);
+        }while(key != SHUTDOWNKEY);
     }
 
     private void init(){

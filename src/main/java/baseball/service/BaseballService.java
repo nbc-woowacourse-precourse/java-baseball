@@ -34,7 +34,7 @@ public class BaseballService {
         checkException(inputNumber);
         if (inputNumber.equals(answerNumber)) {
             output.endGame();
-            return true;
+            return false;
         }
 
         int strikeCount = 0;
@@ -56,10 +56,10 @@ public class BaseballService {
 
         if (strikeCount == 0 & ballCount == 0) {
             output.nothing();
-            return false;
+            return true;
         }
         output.output(ballCount, strikeCount);
-        return false;
+        return true;
 
     }
 
