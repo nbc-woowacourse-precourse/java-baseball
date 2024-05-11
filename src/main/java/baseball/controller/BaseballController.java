@@ -6,8 +6,6 @@ import baseball.io.Output;
 import baseball.service.BaseballService;
 
 public class BaseballController {
-
-    private final int RESTARTKEY = 1;
     private final int SHUTDOWNKEY = 2;
     private Input input;
     private Output output;
