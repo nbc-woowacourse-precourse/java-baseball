@@ -14,8 +14,8 @@ public class BaseballController {
 
     public void start() {
         init();
-        int key = 0;
-        String restartKey = "";
+        int key;
+        String restartKey;
         boolean answerCheck;
         do {
             String answerNumber = service.makeAnswerNumber();
