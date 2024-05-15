@@ -31,8 +31,7 @@ public class GameController {
             String input = Console.readLine();
 
             if (!isValidInput(input)) {
-                System.out.println(WRONG_INPUT_MESSAGE);
-                break;
+                throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
             }
 
             List<Integer> playerNumbers = convertInputToList(input);
