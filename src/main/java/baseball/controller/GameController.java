@@ -1,5 +1,19 @@
 package baseball.controller;
 
+import static baseball.constant.Constant.BALL_STRING;
+import static baseball.constant.Constant.DIGITS;
+import static baseball.constant.Constant.END_GAME_INPUT;
+import static baseball.constant.Constant.INPUT_MESSAGE;
+import static baseball.constant.Constant.NOTHING_STRING;
+import static baseball.constant.Constant.RESTART_GAME_INPUT;
+import static baseball.constant.Constant.RESTART_MESSAGE;
+import static baseball.constant.Constant.START_MESSAGE;
+import static baseball.constant.Constant.STRIKE_STRING;
+import static baseball.constant.Constant.STRIKE_SUCCESS_NUM;
+import static baseball.constant.Constant.SUCCESS_MESSAGE;
+import static baseball.constant.Constant.TERMINATE_MESSAGE;
+import static baseball.constant.Constant.WRONG_INPUT_MESSAGE;
+
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
@@ -8,16 +22,16 @@ import java.util.List;
 public class GameController {
 
     public void startGame() {
-        System.out.println("숫자 야구 게임을 시작합니다.");
+        System.out.println(START_MESSAGE);
 
         List<Integer> computerNumbers = generateRandomNumber();
 
         while (true) {
-            System.out.print("숫자를 입력해주세요 : ");
+            System.out.print(INPUT_MESSAGE);
             String input = Console.readLine();
 
             if (!isValidInput(input)) {
-                System.out.println("잘못 입력했습니다. 게임을 종료합니다.");
+                System.out.println(WRONG_INPUT_MESSAGE);
                 break;
             }
 
@@ -28,20 +42,20 @@ public class GameController {
 
             System.out.println(makeHint(strike, ball));
 
-            if (strike == 3) {
+            if (strike == STRIKE_SUCCESS_NUM) {
                 computerNumbers.clear();
                 computerNumbers = generateRandomNumber();
 
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+                System.out.println(SUCCESS_MESSAGE);
+                System.out.println(RESTART_MESSAGE);
 
                 String restart = Console.readLine();
 
-                if (restart.equals("2")) {
-                    System.out.println("게임을 종료합니다.");
+                if (restart.equals(END_GAME_INPUT)) {
+                    System.out.println(TERMINATE_MESSAGE);
                     break;
-                } else if (!restart.equals("1")) {
-                    throw new IllegalArgumentException("잘못 입력했습니다. 게임을 종료합니다.");
+                } else if (!restart.equals(RESTART_GAME_INPUT)) {
+                    throw new IllegalArgumentException(WRONG_INPUT_MESSAGE);
                 }
             }
         }
@@ -51,24 +65,24 @@ public class GameController {
         StringBuilder sb = new StringBuilder();
         if (strike != 0) {
             if (ball != 0) {
-                sb.append(ball).append("볼").append(strike).append("스트라이크");
+                sb.append(ball).append(BALL_STRING).append(strike).append(STRIKE_STRING);
                 return sb.toString();
             }
-            sb.append(strike).append("스트라이크");
+            sb.append(strike).append(STRIKE_STRING);
             return sb.toString();
         }
         if (ball != 0) {
-            sb.append(ball).append("볼");
+            sb.append(ball).append(BALL_STRING);
             return sb.toString();
         }
-        sb.append("낫싱");
+        sb.append(NOTHING_STRING);
         return sb.toString();
     }
 
     private List<Integer> convertInputToList(String input) {
         List<Integer> numbers = new ArrayList<>();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < DIGITS; i++) {
             char ch = input.charAt(i);
             if (Character.isDigit(ch)) {
                 int digit = Character.digit(ch, 10);
@@ -79,12 +93,12 @@ public class GameController {
     }
 
     private boolean isValidInput(String input) {
-        return input.matches("[1-9]{3}") && input.chars().distinct().count() == 3;
+        return input.matches("[1-9]{3}") && input.chars().distinct().count() == DIGITS;
     }
 
     private static List<Integer> generateRandomNumber() {
         List<Integer> numbers = new ArrayList<>();
-        while (numbers.size() < 3) {
+        while (numbers.size() < DIGITS) {
             int randomNumber = Randoms.pickNumberInRange(1, 9);
             if (!numbers.contains(randomNumber)) {
                 numbers.add(randomNumber);
@@ -95,7 +109,7 @@ public class GameController {
 
     private int getStrikeCount(List<Integer> computerNumbers, List<Integer> playerNumbers) {
         int strikeCount = 0;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < DIGITS; i++) {
             if (computerNumbers.get(i).equals(playerNumbers.get(i))) {
                 strikeCount++;
             }
@@ -105,7 +119,7 @@ public class GameController {
 
     private int getBallCount(List<Integer> computerNumbers, List<Integer> playerNumbers) {
         int ballCount = 0;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < DIGITS; i++) {
             if (!computerNumbers.get(i).equals(playerNumbers.get(i)) && playerNumbers.contains(
                 computerNumbers.get(i))) {
                 ballCount++;
