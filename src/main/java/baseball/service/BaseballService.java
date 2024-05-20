@@ -11,9 +11,12 @@ public class BaseballService {
     private final Output output = new Output();
     private final BaseballException baseballException = new BaseballException();
 
-    private final int STARTNUMBER = 0;
+    private final int STARTNUMBER = 1;
     private final int ENDNUMBER = 9;
     private final int NUMBERRANGE = 3;
+
+    private int strikeCount = 0;
+    private int ballCount = 0;
 
     public String makeAnswerNumber() {
         List<Integer> answerNumbers = Randoms.pickUniqueNumbersInRange(STARTNUMBER, ENDNUMBER, NUMBERRANGE);
@@ -33,13 +36,34 @@ public class BaseballService {
             output.endGame();
             return false;
         }
+        if (chekcAnswer(inputNumber, answerNumber)) {
+            return true;
+        }
+        return false;
+    }
 
-        int strikeCount = 0;
-        int ballCount = 0;
-
+    private boolean chekcAnswer(
+            final String inputNumber,
+            final String answerNumber
+    ) {
         String[] inputNumbers = inputNumber.split("");
         String[] answerNumbers = answerNumber.split("");
+        numberCount(inputNumbers, answerNumbers);
 
+        if (strikeCount == 0 & ballCount == 0) {
+            output.nothing();
+            return true;
+        }
+        output.output(ballCount, strikeCount);
+        strikeCount = 0;
+        ballCount = 0;
+        return true;
+    }
+
+    private void numberCount(
+            final String[] inputNumbers,
+            final String[] answerNumbers
+    ) {
         for (int i = 0; i < NUMBERRANGE; i++) {
             if (inputNumbers[i].equals(answerNumbers[i])) {
                 strikeCount++;
@@ -50,15 +74,8 @@ public class BaseballService {
                 }
             }
         }
-
-        if (strikeCount == 0 & ballCount == 0) {
-            output.nothing();
-            return true;
-        }
-        output.output(ballCount, strikeCount);
-        return true;
-
     }
+
 
     private void checkException(
             final String number
