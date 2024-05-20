@@ -15,6 +15,10 @@ public class BaseballService {
     private final int ENDNUMBER = 9;
     private final int NUMBERRANGE = 3;
 
+    private final int STRIKEZERO = 0;
+
+    private final int BALLZERO = 0;
+
     private int strikeCount = 0;
     private int ballCount = 0;
 
@@ -36,19 +40,19 @@ public class BaseballService {
             output.endGame();
             return false;
         }
-        if (chekcAnswer(inputNumber, answerNumber)) {
+        if (checkAnswer(inputNumber, answerNumber)) {
             return true;
         }
         return false;
     }
 
-    private boolean chekcAnswer(
+    private boolean checkAnswer(
             final String inputNumber,
             final String answerNumber
     ) {
         String[] inputNumbers = inputNumber.split("");
         String[] answerNumbers = answerNumber.split("");
-        numberCount(inputNumbers, answerNumbers);
+        countNumber(inputNumbers, answerNumbers);
 
         if (strikeCount == 0 & ballCount == 0) {
             output.nothing();
@@ -60,7 +64,7 @@ public class BaseballService {
         return true;
     }
 
-    private void numberCount(
+    private void countNumber(
             final String[] inputNumbers,
             final String[] answerNumbers
     ) {
