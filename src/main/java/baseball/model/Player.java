@@ -1,6 +1,7 @@
 package baseball.model;
 
-import baseball.constant.Message;
+import static baseball.constant.Message.ERROR_MSG;
+
 import baseball.io.OutPut;
 import baseball.io.Scanner;
 import baseball.service.BaseballService;
@@ -25,7 +26,7 @@ public class Player {
             int strike = referee.getBallAndStrikeCount(computerNumbers, playerNumbers);
 
             if (!service.validateInput(input)) {
-                throw new IllegalArgumentException(String.valueOf(Message.ERROR));
+                throw new IllegalArgumentException(ERROR_MSG.getMessage());
             }
 
             if (referee.validateThreeStrike(strike, computerNumbers)) {

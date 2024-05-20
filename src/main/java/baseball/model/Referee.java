@@ -1,7 +1,11 @@
 package baseball.model;
 
-import baseball.constant.Hint;
-import baseball.constant.Number;
+import static baseball.constant.Hint.BALL;
+import static baseball.constant.Hint.NOTHING;
+import static baseball.constant.Hint.STRIKE;
+import static baseball.constant.Number.DIGITS;
+import static baseball.constant.Number.THREE_STRIKE;
+
 import baseball.io.OutPut;
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class Referee {
     }
 
     public boolean validateThreeStrike(int strike, List<Integer> computerNumbers) {
-        if (strike == Number.THREE_STRIKE.getNumber()) {
+        if (strike == THREE_STRIKE.getNumber()) {
             computerNumbers.clear();
             computer.generateRandomNumber();
 
@@ -37,16 +41,16 @@ public class Referee {
         StringBuilder sb = new StringBuilder();
 
         if (strike == 0 && ball == 0) {
-            System.out.println(Hint.NOTHING);
+            System.out.println(NOTHING.getHint());
         }
 
         if (strike != 0 && ball != 0) {
-            sb.append(ball).append(Hint.BALL)
-                .append(strike).append(Hint.STRIKE);
+            sb.append(ball).append(BALL.getHint())
+                .append(strike).append(STRIKE.getHint());
         }
 
         if (ball != 0) {
-            sb.append(ball).append(Hint.BALL);
+            sb.append(ball).append(BALL.getHint());
         }
 
         return sb.toString();
@@ -56,7 +60,7 @@ public class Referee {
     public int getStrikeCount(List<Integer> computerNumbers, List<Integer> playerNumbers) {
         int strikeCount = 0;
 
-        for (int i = 0; i < Number.DIGITS.getNumber(); i++) {
+        for (int i = 0; i < DIGITS.getNumber(); i++) {
             if (computerNumbers.get(i).equals(playerNumbers.get(i))) {
                 strikeCount++;
             }
@@ -67,7 +71,7 @@ public class Referee {
     public int getBallCount(List<Integer> computerNumbers, List<Integer> playerNumbers) {
         int ballCount = 0;
 
-        for (int i = 0; i < Number.DIGITS.getNumber(); i++) {
+        for (int i = 0; i < DIGITS.getNumber(); i++) {
             if (!computerNumbers.get(i).equals(playerNumbers.get(i))
                 && playerNumbers.contains(computerNumbers.get(i))) {
                 ballCount++;
