@@ -59,8 +59,8 @@ public class BaseballService {
             return true;
         }
         output.output(ballCount, strikeCount);
-        strikeCount = 0;
-        ballCount = 0;
+        strikeCount = STRIKEZERO;
+        ballCount = BALLZERO;
         return true;
     }
 

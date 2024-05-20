@@ -8,7 +8,6 @@ public class Output {
             final int strike
     ) {
         String format = "%d볼 %d스트라이크" + System.lineSeparator();
-        // \n => 운영체재에 따라 적용이 안됨, System.lineSeparate() 권장
         System.out.printf(format, ball, strike);
     }
 
