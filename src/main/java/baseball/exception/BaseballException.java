@@ -11,6 +11,9 @@ public class BaseballException {
 
     private final int NUMBERLENGTH = 3;
 
+    private final String ETC = "[1-9]+";
+    private final String RESTARTKEY = "[12]";
+
     private void validateInput(
             final String number,
             final Consumer<String> validator
@@ -54,8 +57,7 @@ public class BaseballException {
             final String number
     ) {
         validateInput(number, num -> {
-            String regex = "[1-9]+";
-            if (!num.matches(regex)) {
+            if (!num.matches(ETC)) {
                 throw new IllegalArgumentException(ExceptionMessage.ETC.getMessage());
             }
         });
@@ -65,8 +67,7 @@ public class BaseballException {
             final String number
     ) {
         validateInput(number, num -> {
-            String regex = "[12]";
-            if (!num.matches(regex)) {
+            if (!num.matches(RESTARTKEY)) {
                 throw new IllegalArgumentException(ExceptionMessage.RESTARTKEY.getMessage());
             }
         });
