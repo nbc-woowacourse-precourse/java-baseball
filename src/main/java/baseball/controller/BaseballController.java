@@ -45,7 +45,6 @@ public class BaseballController {
             String inputNumber = input.inputNumber();
             answerCheck = service.checkNumber(inputNumber, answerNumber);
         }
-        ;
     }
 
     private int checkRestartKey(
