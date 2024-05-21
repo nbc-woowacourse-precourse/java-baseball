@@ -40,11 +40,12 @@ public class BaseballController {
     private void execBaseballLogic(
             final String answerNumber
     ) {
-        boolean answerCheck;
-        do {
+        boolean answerCheck = true;
+        while (answerCheck) {
             String inputNumber = input.inputNumber();
             answerCheck = service.checkNumber(inputNumber, answerNumber);
-        } while (answerCheck);
+        }
+        ;
     }
 
     private int checkRestartKey(
