@@ -3,7 +3,7 @@ package baseball.io;
 import baseball.global.message.DefaultMessage;
 
 public class Output {
-    public void output(
+    public void strikeAndBall(
             final int ball,
             final int strike
     ) {
