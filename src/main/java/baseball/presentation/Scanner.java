@@ -13,7 +13,7 @@ public class Scanner {
     }
 
     public boolean restartOrTerminateGame() {
-        String restart = Console.readLine();
+        String restart = getPlayerNumbers();
 
         if (restart.equals(TERMINATE.getMenuChoice())) {
             return true;
