@@ -1,14 +1,27 @@
 package baseball.presentation;
 
-import static baseball.constant.Message.INPUT_MSG;
+import static baseball.constant.MenuChoice.RESTART;
+import static baseball.constant.MenuChoice.TERMINATE;
+import static baseball.constant.Message.ERROR_MSG;
 
 import camp.nextstep.edu.missionutils.Console;
 
 public class Scanner {
 
     public String getPlayerNumbers() {
-        System.out.print(INPUT_MSG.getMessage());
-
         return Console.readLine();
+    }
+
+    public boolean restartOrTerminateGame() {
+        String restart = Console.readLine();
+
+        if (restart.equals(TERMINATE.getMenuChoice())) {
+            return true;
+        }
+
+        if (!restart.equals(RESTART.getMenuChoice())) {
+            throw new IllegalArgumentException(ERROR_MSG.getMessage());
+        }
+        return false;
     }
 }
