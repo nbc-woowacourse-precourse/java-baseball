@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Computer {
+
     public List<Integer> generateSecretNumber() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < 3) {
