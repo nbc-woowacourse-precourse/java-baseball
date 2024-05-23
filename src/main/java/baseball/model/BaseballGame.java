@@ -17,21 +17,21 @@ public class BaseballGame {
     public void start() {
         outPut.startMsg();
         List<Integer> computerNumbers = computer.generateRandomNumber();
+        boolean gameEnded = false;
 
-        while (true) {
+        while (!gameEnded) {
             outPut.inputMsg();
             String input = scanner.getPlayerNumbers();
+
             service.getInput(input);
             int strike = service.getStrike(input, computerNumbers);
 
             if (strike == THREE_STRIKE.getNumber()) {
                 computerNumbers.clear();
                 computerNumbers = computer.generateRandomNumber();
-                outPut.wonTheGame();
 
-                if (scanner.restartOrTerminateGame()) {
-                    break;
-                }
+                outPut.wonTheGame();
+                gameEnded = scanner.restartOrTerminateGame();
             }
         }
     }
