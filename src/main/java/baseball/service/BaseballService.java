@@ -25,6 +25,7 @@ public class BaseballService {
     public String makeAnswerNumber() {
         List<Integer> answerNumbers = Randoms.pickUniqueNumbersInRange(STARTNUMBER, ENDNUMBER, NUMBERRANGE);
         StringBuilder answerNumber = new StringBuilder();
+
         for (Integer num : answerNumbers) {
             answerNumber.append(num);
         }
@@ -36,35 +37,32 @@ public class BaseballService {
             final String answerNumber
     ) {
         checkException(inputNumber);
+
         if (inputNumber.equals(answerNumber)) {
             output.endGame();
             return false;
         }
-        if (checkAnswer(inputNumber, answerNumber)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean checkAnswer(
-            final String inputNumber,
-            final String answerNumber
-    ) {
-        String[] inputNumbers = inputNumber.split("");
-        String[] answerNumbers = answerNumber.split("");
-        countNumber(inputNumbers, answerNumbers);
-
+        checkCount(inputNumber, answerNumber);
         if (strikeCount == 0 & ballCount == 0) {
             output.nothing();
             return true;
         }
         output.strikeAndBall(ballCount, strikeCount);
-        strikeCount = STRIKEZERO;
-        ballCount = BALLZERO;
+        initCount();
         return true;
     }
 
-    private void countNumber(
+    private void checkCount(
+            final String inputNumber,
+            final String answerNumber
+    ) {
+        String[] inputNumbers = inputNumber.split("");
+        String[] answerNumbers = answerNumber.split("");
+
+        countStrikeCount(inputNumbers, answerNumbers);
+    }
+
+    private void countStrikeCount(
             final String[] inputNumbers,
             final String[] answerNumbers
     ) {
@@ -72,12 +70,25 @@ public class BaseballService {
             if (inputNumbers[i].equals(answerNumbers[i])) {
                 strikeCount++;
             }
-            for (int j = 0; j < answerNumbers.length; j++) {
-                if (i != j & inputNumbers[i].equals(answerNumbers[j])) {
-                    ballCount++;
-                }
+            checkBallCount(answerNumbers, inputNumbers, i);
+        }
+    }
+
+    private void checkBallCount(
+            final String[] answerNumbers,
+            final String[] inputNumbers,
+            final int i
+    ) {
+        for (int j = 0; j < answerNumbers.length; j++) {
+            if (i != j & inputNumbers[i].equals(answerNumbers[j])) {
+                ballCount++;
             }
         }
+    }
+
+    private void initCount() {
+        strikeCount = STRIKEZERO;
+        ballCount = BALLZERO;
     }
 
 

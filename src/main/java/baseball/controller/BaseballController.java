@@ -30,14 +30,14 @@ public class BaseballController {
         do {
             String answerNumber = service.makeAnswerNumber();
             output.startGame();
-            execBaseballLogic(answerNumber);
+            findAnswerNumberInInputNumber(answerNumber);
             output.restartGame();
             restartKey = input.inputNumber();
             key = checkRestartKey(restartKey);
         } while (key != SHUTDOWNKEY);
     }
 
-    private void execBaseballLogic(
+    private void findAnswerNumberInInputNumber(
             final String answerNumber
     ) {
         boolean answerCheck = true;
