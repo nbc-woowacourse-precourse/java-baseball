@@ -8,6 +8,7 @@ import static baseball.constant.Number.DIGITS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class BaseballService {
 
@@ -31,10 +32,8 @@ public class BaseballService {
 
     public int getStrike(String input, List<Integer> computerNumbers) {
         List<Integer> playerNumbers = convertInputToNumber(input);
-        int strike = getCount(computerNumbers, playerNumbers,
-            strikeCountCalculator);
-        int ball = getCount(computerNumbers, playerNumbers,
-            ballCountCalculator);
+        int strike = getStrikeCount(computerNumbers, playerNumbers);
+        int ball = getBallCount(computerNumbers, playerNumbers);
 
         System.out.println(makeHint(strike, ball));
         return strike;
@@ -70,31 +69,35 @@ public class BaseballService {
         return sb.toString();
     }
 
-    public int getCount(List<Integer> computerNumbers, List<Integer> playerNumbers,
-        CountCalculator calculator) {
-        return calculator.calculate(computerNumbers, playerNumbers);
+    public int getBallCount(
+        List<Integer> computerNumbers,
+        List<Integer> playerNumbers) {
+
+        return calculateCount(
+            computerNumbers, playerNumbers, (compNum, playerNum) ->
+                !compNum.equals(playerNum) && playerNumbers.contains(compNum)
+        );
     }
 
-    public CountCalculator ballCountCalculator = (computerNumbers, playerNumbers) -> {
-        int ballCount = 0;
+    public int getStrikeCount(
+        List<Integer> computerNumbers,
+        List<Integer> playerNumbers) {
+
+        return calculateCount(computerNumbers, playerNumbers, Integer::equals);
+    }
+
+    private int calculateCount(
+        List<Integer> computerNumbers,
+        List<Integer> playerNumbers,
+        BiPredicate<Integer, Integer> condition) {
+
+        int count = 0;
 
         for (int i = 0; i < DIGITS.getNumber(); i++) {
-            if (!computerNumbers.get(i).equals(playerNumbers.get(i))
-                && playerNumbers.contains(computerNumbers.get(i))) {
-                ballCount++;
+            if (condition.test(computerNumbers.get(i), playerNumbers.get(i))) {
+                count++;
             }
         }
-        return ballCount;
-    };
-
-    public CountCalculator strikeCountCalculator = (computerNumbers, playerNumbers) -> {
-        int strikeCount = 0;
-
-        for (int i = 0; i < DIGITS.getNumber(); i++) {
-            if (computerNumbers.get(i).equals(playerNumbers.get(i))) {
-                strikeCount++;
-            }
-        }
-        return strikeCount;
-    };
+        return count;
+    }
 }
