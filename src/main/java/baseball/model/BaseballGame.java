@@ -9,10 +9,10 @@ import java.util.List;
 
 public class BaseballGame {
 
-    Computer computer = new Computer();
-    BaseballService service = new BaseballService();
-    Scanner scanner = new Scanner();
-    OutPut outPut = new OutPut();
+    private final Computer computer = new Computer();
+    private final BaseballService service = new BaseballService();
+    private final Scanner scanner = new Scanner();
+    private final OutPut outPut = new OutPut();
 
     public void start() {
         outPut.startMsg();
