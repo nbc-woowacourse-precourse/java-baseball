@@ -3,7 +3,7 @@ package baseball.service;
 import static baseball.constant.Hint.BALL;
 import static baseball.constant.Hint.NOTHING;
 import static baseball.constant.Hint.STRIKE;
-import static baseball.constant.Message.ERROR_MSG;
+import static baseball.constant.Message.ERROR_MESSAGE;
 import static baseball.constant.Number.DIGITS;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class BaseballService {
 
     public void getInput(String input) {
         if (!validateInput(input)) {
-            throw new IllegalArgumentException(ERROR_MSG.getMessage());
+            throw new IllegalArgumentException(ERROR_MESSAGE.getMessage());
         }
     }
 

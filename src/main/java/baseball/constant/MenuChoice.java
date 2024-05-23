@@ -2,7 +2,8 @@ package baseball.constant;
 
 public enum MenuChoice {
 
-    RESTART("1"), TERMINATE("2");
+    RESTART("1"),
+    TERMINATE("2");
 
     private final String menuChoice;
 
